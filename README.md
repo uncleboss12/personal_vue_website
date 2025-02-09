@@ -22,3 +22,7 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+# we can also use docker to run the website for convinience.
+# i will add the Docker configurations after this line 
