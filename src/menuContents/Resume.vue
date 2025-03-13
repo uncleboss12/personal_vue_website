@@ -56,7 +56,7 @@
         <div class="format">
           <h4>PDF Format</h4>
           <p>Standard downloadable version for printing or saving locally.</p>
-          <a href="https://https://github.com/uncleboss12/my-resume/raw/main/Justine_Obiazi_Resume.pdf" target="_blank">Download PDF</a>
+          <a href="https://github.com/uncleboss12/my-resume/raw/main/Justine_Obiazi_Resume.pdf" target="_blank">Download PDF</a>
         </div>
         <div class="format">
           <h4>Word Document</h4>
