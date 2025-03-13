@@ -41,7 +41,24 @@
         </div>
       </div>
     </div>
-    
+    <div class="labs-section">
+      <h3>My Labs</h3>
+      <p>Check out the labs I've completed on various platforms:</p>
+      <div class="labs-links">
+        <a href="https://www.cloudskillsboost.google/public_profiles/f2189c0f-a033-4370-9172-5ce0d3285eed" target="_blank" class="lab-button gcp">
+          <span class="icon">☁️</span>
+          <span class="text">GCP Skill Boost</span>
+        </a>
+        <a href="https://docs.microsoft.com/en-us/users/JustineObiazi-2590" target="_blank" class="lab-button azure">
+          <span class="icon">☁️</span>
+            <span class="text">Microsoft Learn</span>
+          </a>
+          <a href="https://www.credly.com/users/justine-obiazi" target="_blank" class="lab-button credly">
+            <span class="icon">☁️</span>
+            <span class="text">Credly</span>
+        </a>
+      </div>
+    </div>
     <div class="featured-content">
       <h3>Featured Highlights</h3>
       <div class="feature-cards">
