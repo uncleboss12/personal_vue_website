@@ -1,19 +1,82 @@
 <template>
   <div id="app">
-    <div class="top-menu">
-      <div class="menu-item" @click="currentView = 'HomePage'">Home</div>
-      <div class="menu-item" @click="currentView = 'AboutPage'">About</div>
-      <div class="menu-item" @click="currentView = 'ResumePage'">Resume</div>
-      <div class="menu-item" @click="currentView = 'CertificationPage'">Certification</div>
-      <div class="menu-item" @click="currentView = 'ProjectsPage'">Projects</div>
-      <div class="menu-item" @click="currentView = 'BlogPage'">Blog</div>
+    <div class="sidebar">
+      <div class="logo">
+        <h2 v-if="!isSidebarCollapsed">Justine Webpage</h2>
+        <h2 v-else>JW</h2>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item" :class="{ active: currentView === 'HomePage' }" @click="currentView = 'HomePage'">
+          <span class="menu-icon">🏠</span>
+          <span class="menu-text">Home</span>
+        </div>
+        <div class="menu-item" :class="{ active: currentView === 'AboutPage' }" @click="currentView = 'AboutPage'">
+          <span class="menu-icon">👤</span>
+          <span class="menu-text">About</span>
+        </div>
+        <div class="menu-item" :class="{ active: currentView === 'ResumePage' }" @click="currentView = 'ResumePage'">
+          <span class="menu-icon">📄</span>
+          <span class="menu-text">Resume</span>
+        </div>
+        <div class="menu-item" :class="{ active: currentView === 'CertificationPage' }" @click="currentView = 'CertificationPage'">
+          <span class="menu-icon">🏆</span>
+          <span class="menu-text">Certification</span>
+        </div>
+        <div class="menu-item" :class="{ active: currentView === 'ProjectsPage' }" @click="currentView = 'ProjectsPage'">
+          <span class="menu-icon">💻</span>
+          <span class="menu-text">Projects</span>
+        </div>
+        <div class="menu-item" :class="{ active: currentView === 'BlogPage' }" @click="currentView = 'BlogPage'">
+          <span class="menu-icon">📝</span>
+          <span class="menu-text">Blog</span>
+        </div>
+      </div>
     </div>
-    <div class="content">
-      <component :is="currentView"></component>
+    
+    <div class="main-content">
+      <div class="header">
+        <div class="menu-button" @click="toggleMobileSidebar">☰</div>
+        <h1>My Personal Website</h1>
+      </div>
+      <div class="content">
+        <component :is="currentView"></component>
+      </div>
+      <footer>
+        <p>@2025 | Contact: justineobiazi@gmail.com</p>
+      </footer>
     </div>
-    <footer>
-      <p>@2025 | Contact: justineobiazi@gmail.com</p>
-    </footer>
+    
+    <!-- Mobile sidebar overlay -->
+    <div class="mobile-sidebar-overlay" v-if="isMobileSidebarOpen" @click="toggleMobileSidebar"></div>
+    <div class="mobile-sidebar" :class="{ open: isMobileSidebarOpen }">
+      <div class="close-button" @click="toggleMobileSidebar">×</div>
+      <div class="menu-items">
+        <div class="menu-item" :class="{ active: currentView === 'HomePage' }" @click="currentView = 'HomePage'; toggleMobileSidebar()">
+          <span class="menu-icon">🏠</span>
+          <span class="menu-text">Home</span>
+        </div>
+        <div class="menu-item" :class="{ active: currentView === 'AboutPage' }" @click="currentView = 'AboutPage'; toggleMobileSidebar()">
+          <span class="menu-icon">👤</span>
+          <span class="menu-text">About</span>
+        </div>
+        <div class="menu-item" :class="{ active: currentView === 'ResumePage' }" @click="currentView = 'ResumePage'; toggleMobileSidebar()">
+          <span class="menu-icon">📄</span>
+          <span class="menu-text">Resume</span>
+        </div>
+        <div class="menu-item" :class="{ active: currentView === 'CertificationPage' }" @click="currentView = 'CertificationPage'; toggleMobileSidebar()">
+          <span class="menu-icon">🏆</span>
+          <span class="menu-text">Certification</span>
+        </div>
+        <div class="menu-item" :class="{ active: currentView === 'ProjectsPage' }" @click="currentView = 'ProjectsPage'; toggleMobileSidebar()">
+          <span class="menu-icon">💻</span>
+          <span class="menu-text">Projects</span>
+        </div>
+        <div class="menu-item" :class="{ active: currentView === 'BlogPage' }" @click="currentView = 'BlogPage'; toggleMobileSidebar()">
+          <span class="menu-icon">📝</span>
+          <span class="menu-text">Blog</span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -29,7 +92,7 @@ export default {
   name: 'App',
   data() {
     return {
-      isSidebarOpen: false,
+      isMobileSidebarOpen: false,
       currentView: 'HomePage',
     };
   },
@@ -42,41 +105,103 @@ export default {
     BlogPage,
   },
   methods: {
-    toggleSidebar() {
-      this.isSidebarOpen = !this.isSidebarOpen;
+    toggleMobileSidebar() {
+      this.isMobileSidebarOpen = !this.isMobileSidebarOpen;
     },
   },
 };
 </script>
 
 <style>
-#app {
-  font-family: 'Arial', sans-serif;
-  color: #333;
-  background: linear-gradient(to right, #ff7e5f, #feb47b);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.top-menu {
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+#app {
+  font-family: 'Roboto', 'Arial', sans-serif;
+  color: #333;
+  background-color: white;
+  min-height: 100vh;
   display: flex;
-  justify-content: space-around;
-  background-color: #2c3e50;
-  padding: 10px;
-  color: white;
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 250px;
+  background-color: #f8f9fa;
+  border-right: 1px solid #e9ecef;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  padding: 20px 15px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.logo h2 {
+  font-size: 1.2rem;
+  color: #1a73e8;
+}
+
+.menu-items {
+  padding: 15px 0;
 }
 
 .menu-item {
-  padding: 10px;
-  background-color: #34495e;
-  border-radius: 5px;
+  padding: 12px 15px;
+  display: flex;
+  align-items: center;
   cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .menu-item:hover {
-  background-color: #1abc9c;
+  background-color: #e8f0fe;
+}
+
+.menu-item.active {
+  background-color: #e8f0fe;
+  color: #1a73e8;
+  font-weight: 500;
+  border-left: 3px solid #1a73e8;
+}
+
+.menu-icon {
+  margin-right: 15px;
+}
+
+/* Main content styles */
+.main-content {
+  flex: 1;
+  margin-left: 250px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  padding: 15px 20px;
+  border-bottom: 1px solid #e9ecef;
+  display: flex;
+  align-items: center;
+}
+
+.menu-button {
+  display: none;
+  font-size: 20px;
+  margin-right: 15px;
+  cursor: pointer;
 }
 
 .content {
@@ -85,9 +210,60 @@ export default {
 }
 
 footer {
-  background-color: #2c3e50;
-  color: white;
+  background-color: #f8f9fa;
   text-align: center;
-  padding: 10px;
+  padding: 15px;
+  border-top: 1px solid #e9ecef;
+}
+
+/* Mobile sidebar styles */
+.mobile-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: white;
+  z-index: 1000;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-sidebar.open {
+  transform: translateX(0);
+}
+
+.mobile-sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Media queries for responsive layout */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .menu-button {
+    display: block;
+  }
 }
 </style>
