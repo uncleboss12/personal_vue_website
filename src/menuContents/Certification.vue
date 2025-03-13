@@ -54,7 +54,7 @@
     <!-- Microsoft Azure Certifications -->
     <div class="certification-category">
       <div class="category-header">
-        <img class="category-icon" src="@/assets/certification-icons/azure-icon.png" alt="Azure" />
+        <img class="category-icon" src="@/assets/certification-icons/azure-icon.jpg" alt="Azure" />
         <h3>Microsoft Azure</h3>
       </div>
       <div class="certification-grid">

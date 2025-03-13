@@ -220,7 +220,7 @@ export default {
           title: 'CI/CD Pipeline for Microservices',
           description: 'Automated CI/CD pipeline for a microservices architecture using Jenkins, Docker, and Kubernetes.',
           image: null, // Replace with your image path
-          technologies: ['Jenkins', 'Docker', 'Kubernetes', 'Terraform'],
+          technologies: ['Jenkins', 'Docker', 'Kubernetes', 'Terraform', 'AWS', 'GCP'],
           githubUrl: 'https://https://github.com/uncleboss12/microservices-cicd-reverseproxy',
           demoUrl: null
         },

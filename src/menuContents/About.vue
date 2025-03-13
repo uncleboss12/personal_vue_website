@@ -109,7 +109,7 @@ export default {
       cloudImages: [
         require('@/assets/certifications/aws-certification.png'),
         require('@/assets/certifications/gcp-certification.png'),
-        require('@/assets/certifications/azure-certification.png')
+        require('@/assets/certifications/azure-certification.jpg')
       ],
       projectImages: [
         require('@/assets/projects/data-science-project.png'),
