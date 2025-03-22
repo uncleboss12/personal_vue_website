@@ -1,3 +1,25 @@
+# terraform files 
+*.tfstate
+*.tfstate.backup
+*.tfvars
+*.tfplan
+*.tfout
+.terraform/
+
+# secrets
+*.pem
+*.key
+*.pub
+*.cer
+*.crt
+*.csr
+*.p12
+*.pfx
+*.gpg
+*.jks
+*.keychain
+
+
 # Logs
 logs
 *.log

@@ -6,7 +6,7 @@ docker build -t personal-vue-website:latest .
 
 # Tag the image for your registry (replace with your Docker Hub username or ECR registry)
 ```bash
-docker tag personal-vue-website:latest your-registry/personal-vue-website:latest
+docker tag personal-vue-website:latest uncleboss12/personal-vue-webapp:latest
 ```
 # Login to your registry
 ```bash
@@ -14,7 +14,8 @@ docker login
 ```
 # Push the image
 ```bash
-docker push your-registry/personal-vue-website:latest
+
+docker push uncleboss12/personal-vue-webapp:latest
 ```
 
 # Phase 2: Development Environment Setup on EC2
@@ -44,8 +45,8 @@ aws ec2 attach-internet-gateway --internet-gateway-id $IGW_ID --vpc-id $VPC_ID
 
 # Create public subnets in two AZs
 ```bash
-aws ec2 create-subnet --vpc-id $VPC_ID --cidr-block 10.0.1.0/24 --availability-zone us-east-1a --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=public-subnet-1}]'
-aws ec2 create-subnet --vpc-id $VPC_ID --cidr-block 10.0.2.0/24 --availability-zone us-east-1b --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=public-subnet-2}]'
+aws ec2 create-subnet --vpc-id $VPC_ID --cidr-block 10.0.1.0/24 --availability-zone us-west-2a --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=public-subnet-1}]'
+aws ec2 create-subnet --vpc-id $VPC_ID --cidr-block 10.0.2.0/24 --availability-zone us-west-2b --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=public-subnet-2}]'
 ```
 # Store subnet IDs
 ```bash
@@ -54,8 +55,8 @@ PUBLIC_SUBNET_2=$(aws ec2 describe-subnets --filters "Name=tag:Name,Values=publi
 ```
 # Create private subnets for EKS in two AZs
 ```bash
-aws ec2 create-subnet --vpc-id $VPC_ID --cidr-block 10.0.3.0/24 --availability-zone us-east-1a --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=private-subnet-1}]'
-aws ec2 create-subnet --vpc-id $VPC_ID --cidr-block 10.0.4.0/24 --availability-zone us-east-1b --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=private-subnet-2}]'
+aws ec2 create-subnet --vpc-id $VPC_ID --cidr-block 10.0.3.0/24 --availability-zone us-west-2a --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=private-subnet-1}]'
+aws ec2 create-subnet --vpc-id $VPC_ID --cidr-block 10.0.4.0/24 --availability-zone us-west-1b --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=private-subnet-2}]'
 
 PRIVATE_SUBNET_1=$(aws ec2 describe-subnets --filters "Name=tag:Name,Values=private-subnet-1" --query "Subnets[0].SubnetId" --output text)
 PRIVATE_SUBNET_2=$(aws ec2 describe-subnets --filters "Name=tag:Name,Values=private-subnet-2" --query "Subnets[0].SubnetId" --output text)
@@ -99,7 +100,7 @@ WEB_SG=$(aws ec2 describe-security-groups --filters "Name=tag:Name,Values=web-sg
 ```bash
 aws ec2 authorize-security-group-ingress --group-id $WEB_SG --protocol tcp --port 80 --cidr 0.0.0.0/0
 aws ec2 authorize-security-group-ingress --group-id $WEB_SG --protocol tcp --port 443 --cidr 0.0.0.0/0
-aws ec2 authorize-security-group-ingress --group-id $WEB_SG --protocol tcp --port 22 --cidr YOUR_IP_ADDRESS/32  # Replace with your IP
+aws ec2 authorize-security-group-ingress --group-id $WEB_SG --protocol tcp --port 22 --cidr 73.37.49.61/32  # Replace with your IP
 ```
 
 # Create key pair (or use an existing one)
@@ -111,7 +112,7 @@ chmod 400 personal-website-key.pem
 # Launch EC2 instance
 ```bash
 aws ec2 run-instances \
-  --image-id ami-0c55b159cbfafe1f0 \  # Amazon Linux 2 AMI (replace with the latest)
+  --image-id ami-0520f976ad2e6300c \ 
   --instance-type t2.micro \
   --key-name personal-website-key \
   --security-group-ids $WEB_SG \
@@ -123,7 +124,8 @@ aws ec2 run-instances \
     systemctl start docker
     systemctl enable docker
     usermod -aG docker ec2-user
-    curl -L "https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    mkdir -p /usr/local/lib/docker/cli-plugins
+    curl -SL https://github.com/docker/compose/releases/download/v2.34.0/docker-compose-linux-x86_64 -o /usr/local/lib/docker/cli-plugins
     chmod +x /usr/local/bin/docker-compose
     reboot'
 ```
@@ -145,7 +147,7 @@ ssh -i personal-website-key.pem ec2-user@$INSTANCE_IP
 ```
 #### Clone repository
 ```bash
-git clone https://github.com/your-username/personal_vue_website.git
+git clone https://github.com/uncleboss12/personal_vue_website.git
 cd personal_vue_website
 ```
 #### Create docker-compose.yml file
@@ -154,7 +156,7 @@ cat > docker-compose.yml << 'EOL'
 version: '3'
 services:
   web:
-    image: your-registry/personal-vue-website:latest
+    image: uncleboss12/personal-vue-webapp:latest
     ports:
       - "80:80"
     restart: always
@@ -163,8 +165,12 @@ EOL
 
 ##### Run the container
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
+
+### open the website and check the page at http://<PUBLIC_IP>
+
+
 # Phase 3: Production Deployment on EKS
 
 # Install eksctl if not installed
@@ -391,3 +397,37 @@ jobs:
       
     - name: Invalidate CloudFront cache
       run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+
+
+
+
+  # Creating Infrastructure using terraform
+
+  ## because i have already created the infrastructure manually, i am importing the infrastructure using terrafrom import 
+
+  ```bash 
+terraform import aws_vpc.personal_website_vpc vpc-0e2ef785fe899db22
+
+terraform import 'aws_subnet.subnets["private-subnet-1"]'  subnet-0ea41340749c6e8bd
+terraform import 'aws_subnet.subnets["private-subnet-2"]'  subnet-0f23cda98987975c6
+terraform import 'aws_subnet.subnets[ "public-subnet-1"]' subnet-0cd7e52b33c03c5a3
+terraform import 'aws_subnet.subnets["public-subnet-2"]' subnet-0d578a7a5f1e1aadd
+
+terraform import aws_route.public-rt rtb-rtb-068494c2e27083d1a_10.0.0.0/16
+
+terraform import aws_security_group.web_sg sg-0beda4678455f9b2d
+
+terraform state list
+
+terraform validate
+
+terraform plan
+
+terraform apply -auto-approve
+```
+
+also i did the config and statefile using this 
+
+```bash
+ terraform plan -generate-config-out="vpc.tf"
+ ```

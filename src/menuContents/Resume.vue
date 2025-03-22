@@ -61,7 +61,7 @@
         <div class="format">
           <h4>Word Document</h4>
           <p>Microsoft Word format for when you need an editable version.</p>
-          <a href="https://github.com/uncleboss12/my-resume/raw/main/Justine_Obiazi_Resume.docx" target="_blank">Download DOCX</a>
+          <a href="https://github.com/uncleboss12/my-resume/raw/refs/heads/main/Justine_Obiazi_Resume.docx" target="_blank">Download DOCX</a>
         </div>
         <div class="format">
           <h4>Markdown</h4>

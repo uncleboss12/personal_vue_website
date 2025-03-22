@@ -28,3 +28,29 @@ coverage
 # System files
 .DS_Store
 Thumbs.db
+
+# folders
+terraform
+
+
+# terraform files 
+*.tfstate
+*.tfstate.backup
+*.tfvars
+*.tfplan
+*.tfout
+.terraform/
+
+
+# secrets
+*.pem
+*.key
+*.pub
+*.cer
+*.crt
+*.csr
+*.p12
+*.pfx
+*.gpg
+*.jks
+*.keychain
