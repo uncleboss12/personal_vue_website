@@ -160,13 +160,13 @@ export default {
           logo: require('@/assets/certification-logos/azure-data-scientist.png'),
           verificationLink: 'https://learn.microsoft.com/en-us/users/justineobiazi-2590/credentials/26d1e3d063410907?ref=https%3A%2F%2Fwww.linkedin.com%2F'
         },
-        /*{
+        {
           title: 'Microsoft Certified: Azure Data Engineer Associate',
           issueDate: 'April 2025',
           description: 'Validates skills in implementing, monitoring, and maintaining Microsoft Azure solutions.',
           logo: require('@/assets/certification-logos/azure-data-engineer.png'),
-          verificationLink: 'https://learn.microsoft.com/en-us/users/me/transcript/verify'
-        }*/
+          verificationLink: 'https://learn.microsoft.com/api/credentials/share/en-us/JustineObiazi-2590/E06E4416C0B1FDC2?sharingId=223C2363C6C9D342'
+        }
       ],
       oracleCertifications: [
         {
@@ -177,24 +177,24 @@ export default {
           verificationLink: null
         }
       ],
-      /*devopsCertifications: [
-        {
+      devopsCertifications: [
+        /*{
           title: 'Certified Kubernetes Administrator (CKA)',
           issueDate: 'April 2025',
           description: 'Validates expertise in Kubernetes administration and cluster management.',
           logo: require('@/assets/certification-logos/cka.png'),
           verificationLink: 'https://training.linuxfoundation.org/certification/verify/',
           verifyText: 'Verify on Linux Foundation'
-        },
+        },*/
         {
           title: 'HashiCorp Certified: Terraform Associate',
           issueDate: 'April 2025',
           description: 'Validates expertise in infrastructure as code using HashiCorp Terraform.',
           logo: require('@/assets/certification-logos/terraform-associate.jpg'),
-          verificationLink: 'https://www.credly.com/badges/your-badge-id',
+          verificationLink: 'https://www.credly.com/badges/5b96cfa3-70ef-4b2e-a940-022a1e8d58bb/public_url',
           verifyText: 'Verify on Credly'
         }
-      ]*/
+      ]
     };
   }
 };

@@ -70,7 +70,7 @@ resource "aws_instance" "dev_personal_instance" {
     connection {
       type        = "ssh"
       user        = "ec2-user"
-      private_key = file("/mnt/c/Users/justi/personal_project_folder/personal_vue_website/terraform-aws-key-pair.pem") 
+      private_key = file("terraform-aws-key-pair.pem") 
       host        = self.public_ip
     }
 
