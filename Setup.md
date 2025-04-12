@@ -247,12 +247,37 @@ spec:
     targetPort: 80
   type: LoadBalancer
 ```
-# Deploy to EKS
 
+### install kubectl
+```bash
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
+
+kubectl version --client
+
+```
+# Deploy to EKS
+```bash
+eksctl create cluster --name personal-website --region us-west-2 --version 1.32 --vpc-private-subnets subnet-0ea41340749c6e8bd,subnet-0f23cda98987975c6 --without-nodegroup
+
+aws eks describe-cluster --region us-west-2 --name personal-website-eks-cluster --query "cluster.status"
+
+aws eks update-kubeconfig --region us-west-2 --name personal-website-eks-cluster
+
+kubectl get svc
+```
 # Apply Kubernetes configurations
+```bash
 kubectl apply -f k8s/deployment.yaml
 kubectl apply -f k8s/service.yaml
 
+kubectl create secret docker-registry my-registry-secret \
+  --docker-username=<username> \
+  --docker-password=<password> \
+  --docker-server=<registry-url> \
+  --docker-email=<email>
+```
 # Check deployment status
 kubectl get deployments
 kubectl get pods
@@ -406,16 +431,19 @@ jobs:
   ## because i have already created the infrastructure manually, i am importing the infrastructure using terrafrom import 
 
   ```bash 
-terraform import aws_vpc.personal_website_vpc vpc-0e2ef785fe899db22
+terraform import aws_vpc.personal-website-vpc vpc-0e2ef785fe899db22
 
 terraform import 'aws_subnet.subnets["private-subnet-1"]'  subnet-0ea41340749c6e8bd
 terraform import 'aws_subnet.subnets["private-subnet-2"]'  subnet-0f23cda98987975c6
 terraform import 'aws_subnet.subnets[ "public-subnet-1"]' subnet-0cd7e52b33c03c5a3
 terraform import 'aws_subnet.subnets["public-subnet-2"]' subnet-0d578a7a5f1e1aadd
 
-terraform import aws_route.public-rt rtb-rtb-068494c2e27083d1a_10.0.0.0/16
 
-terraform import aws_security_group.web_sg sg-0beda4678455f9b2d
+terraform import aws_internet_gateway.personal_website_igw igw-0347b7e82a06a8dac
+
+terraform import aws_route_table.public_rt rtb-068494c2e27083d1a
+
+terraform import aws_security_group.web-sg sg-0beda4678455f9b2d
 
 terraform state list
 
@@ -431,3 +459,11 @@ also i did the config and statefile using this
 ```bash
  terraform plan -generate-config-out="vpc.tf"
  ```
+
+made some errors with my vpc and security-group when i was importing configuration, where i used underscore unstead of dash, had to move the state file to the correct one isntead of destroying my vpc and security group.
+
+```bash
+terraform state mv aws_vpc.personal_website_vpc aws_vpc.personal-website-vpc
+
+terraform state mv aws_security_group.web_sg aws_security_group.web-sg
+```

@@ -1,0 +1,49 @@
+{
+    "CallerReference": "justineobiazi-website",
+    "Origins": {
+      "Items": [
+        {
+          "Id": "S3-justineobiazi-website",
+          "DomainName": "justineobiazi-website.s3.amazonaws.com",
+          "OriginPath": "",
+          "CustomHeaders": {
+            "Quantity": 0
+          },
+          "S3OriginConfig": {
+            "OriginAccessIdentity": ""
+          }
+        }
+      ],
+      "Quantity": 1
+    },
+    "DefaultCacheBehavior": {
+      "TargetOriginId": "S3-justineobiazi-website",
+      "ViewerProtocolPolicy": "redirect-to-https",
+      "AllowedMethods": {
+        "Quantity": 2,
+        "Items": ["GET", "HEAD"],
+        "CachedMethods": {
+          "Quantity": 2,
+          "Items": ["GET", "HEAD"]
+        }
+      },
+      "Compress": true,
+      "DefaultTTL": 86400,
+      "MinTTL": 0,
+      "MaxTTL": 31536000,
+      "ForwardedValues": {
+        "QueryString": false,
+        "Cookies": {
+          "Forward": "none"
+        },
+        "Headers": {
+          "Quantity": 0
+        },
+        "QueryStringCacheKeys": {
+          "Quantity": 0
+        }
+      }
+    },
+    "Comment": "CloudFront distribution for justineobiazi-website",
+    "Enabled": true
+  }

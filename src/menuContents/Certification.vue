@@ -160,13 +160,13 @@ export default {
           logo: require('@/assets/certification-logos/azure-data-scientist.png'),
           verificationLink: 'https://learn.microsoft.com/en-us/users/justineobiazi-2590/credentials/26d1e3d063410907?ref=https%3A%2F%2Fwww.linkedin.com%2F'
         },
-        /*{
+        {
           title: 'Microsoft Certified: Azure Data Engineer Associate',
           issueDate: 'April 2025',
           description: 'Validates skills in implementing, monitoring, and maintaining Microsoft Azure solutions.',
           logo: require('@/assets/certification-logos/azure-data-engineer.png'),
-          verificationLink: 'https://learn.microsoft.com/en-us/users/me/transcript/verify'
-        }*/
+          verificationLink: 'https://learn.microsoft.com/api/credentials/share/en-us/JustineObiazi-2590/E06E4416C0B1FDC2?sharingId=223C2363C6C9D342'
+        }
       ],
       oracleCertifications: [
         {

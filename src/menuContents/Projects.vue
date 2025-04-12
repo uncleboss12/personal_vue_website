@@ -206,22 +206,22 @@ export default {
       dataEngineeringProjects: [
         {
           id: 'de1',
-          title: 'Real-time Data Pipeline with Apache Kafka',
-          description: 'Scalable data pipeline for processing streaming data using Apache Kafka and Spark Streaming.',
+          title: 'Real-time Data Pipeline with Docker-Postgres-Spark-terraform-MageAI',
+          description: 'Scalable data pipeline for processing streaming data using  Spark Postgres built with docker-compose.',
           image: null, // Replace with your image path
-          technologies: ['Apache Kafka', 'Spark Streaming', 'Python', 'AWS'],
-          githubUrl: 'https://https://github.com/uncleboss12/kafka-data-pipeline',
+          technologies: ['Docker', 'Spark Streaming', 'Python', 'AWS', 'Terraform', 'Postgres-sql'],
+          githubUrl: 'https://github.com/uncleboss12/justineZoomCamp2024',
           demoUrl: null
         }
       ],
       devOpsProjects: [
         {
           id: 'do1',
-          title: 'CI/CD Pipeline for Microservices',
+          title: 'Migrate-Existing-Prometheus-Monitoring-Workloads',
           description: 'Automated CI/CD pipeline for a microservices architecture using Jenkins, Docker, and Kubernetes.',
           image: null, // Replace with your image path
-          technologies: ['Jenkins', 'Docker', 'Kubernetes', 'Terraform', 'AWS', 'GCP'],
-          githubUrl: 'https://https://github.com/uncleboss12/microservices-cicd-reverseproxy',
+          technologies: ['git actions', 'Docker', 'Kubernetes', 'AWS EKS', 'GCP GKS'],
+          githubUrl: 'https://github.com/uncleboss12/Migrate-Existing-Prometheus-Monitoring-Workloads',
           demoUrl: null
         },
         {
@@ -233,6 +233,7 @@ export default {
           githubUrl: 'https://https://github.com/uncleboss12/terraform_projects',
           demoUrl: null
         }
+        
       ],
       cloudProjects: [
         {
@@ -240,18 +241,17 @@ export default {
           title: 'Multi-Cloud Web Application',
           description: 'Fault-tolerant web application deployed across multiple cloud providers with automated failover.',
           image: null, // Replace with your image path
-          technologies: ['AWS', 'GCP', 'Kubernetes', 'Istio'],
+          technologies: ['AWS', 'GCP', 'Kubernetes']
           githubUrl: 'https://github.com/uncleboss12/Kubernetes-and-Docker-Projects-Using-CloudProviders',
           demoUrl: null
         },
         {
           id: 'ca2',
-          title: 'Serverless Data Processing',
+          title: 'Serverless Data Processing for Website Visitors',
           description: 'Serverless architecture for real-time data processing and analytics using cloud functions.',
           image: null, // Replace with your image path
-          technologies: ['AWS Lambda', 'DynamoDB', 'API Gateway', 'CloudWatch'],
-          githubUrl: 'https://https://github.com/uncleboss12/severless-data-processing',
-          demoUrl: null
+          technologies: ['AWS Lambda', 'DynamoDB', 'API Gateway', 'CloudWatch', 'S3'],
+          githubUrl: 'Private-Repo',
         }
       ]
     };
